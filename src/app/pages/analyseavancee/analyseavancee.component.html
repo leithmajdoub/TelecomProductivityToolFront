@@ -111,17 +111,19 @@
                 <nb-list nbInfiniteList listenWindowScroll>
                   <nb-list-item *ngFor="let act of activitiesList">
 
-                    <label>
-                      Combien d’employés travaillent sur l’activité ?
-                      <input type="text" placeholder="{{act}}" class="form-control" formControlName="firstCtrl"
-                        [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
-                    </label>
-
-                    <label>
-                      Quelle est la valeur du driver de productivité ?
-                      <input type="text" placeholder="Valeur du driver" class="form-control" formControlName="firstCtrl"
-                        [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
-                    </label>
+                    <div class="center-labels">
+                      <label>
+                        Combien d’employés travaillent sur l’activité ?
+                        <input type="text" placeholder="{{act}}" class="form-control" formControlName="firstCtrl"
+                          [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                      </label>
+          
+                      <label>
+                        Quelle est la valeur du driver de productivité ?
+                        <input type="text" placeholder="Valeur du driver" class="form-control" formControlName="firstCtrl"
+                          [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                      </label>
+                    </div>
                   
                   </nb-list-item>
                 </nb-list>

@@ -44,7 +44,7 @@ export class AnalyseavanceeComponent implements OnInit {
 
   ngOnInit() {
     this.firstForm = this.fb.group({
-      firstCtrl: ['', Validators.required],
+      firstCtrl: [''],
     });
 
     this.secondForm = this.fb.group({
