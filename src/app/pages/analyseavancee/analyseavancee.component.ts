@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Options } from '@angular-slider/ngx-slider';
+import { Unite } from '../../models/Unite';
+import { UniteService } from '../../services/unite.service';
 
 @Component({
   selector: 'ngx-analyseavancee',
@@ -8,6 +10,8 @@ import { Options } from '@angular-slider/ngx-slider';
   styleUrls: ['./analyseavancee.component.scss']
 })
 export class AnalyseavanceeComponent implements OnInit {
+
+  unite: Unite;
 
   minValue: number = 50;
   maxValue: number = 200;
@@ -39,7 +43,8 @@ export class AnalyseavanceeComponent implements OnInit {
   fifthForm: UntypedFormGroup;
 
 
-  constructor(private fb: UntypedFormBuilder) {
+  constructor(private fb: UntypedFormBuilder, private uniteService: UniteService) {
+    this.unite = new Unite();
   }
 
   ngOnInit() {
@@ -61,7 +66,14 @@ export class AnalyseavanceeComponent implements OnInit {
   }
 
   onFirstSubmit() {
+    this.uniteService
+    .createUnite(this.unite).subscribe(data => {
+        console.log(data)
+      },
+        error => console.log(error));
+
     this.firstForm.markAsDirty();
+    
   }
 
   onSecondSubmit() {

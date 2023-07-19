@@ -12,7 +12,7 @@
 
                 <input type="text" placeholder="Nom" class="form-control small-input" formControlName="firstCtrl"
                   style="width: 200px;"
-                  [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                  [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}" [(ngModel)]="unite.name">
               </div>
               <br>
               <br>
@@ -21,9 +21,9 @@
               </p>
               <div class="input-group">
                 <input type="text" placeholder="Taille" class="form-control" formControlName="firstCtrl"
-                  [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                  [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}" [(ngModel)]="unite.nbEmployees" >
               </div>
-              <button nbButton nbStepperNext>Suivant</button>
+              <button type="submit" nbButton nbStepperNext>Suivant</button>
             </form>
           </nb-step>
 
