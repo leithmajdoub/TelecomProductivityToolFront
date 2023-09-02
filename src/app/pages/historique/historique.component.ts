@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import autoTable from "jspdf-autotable"
+import { NbWindowService } from '@nebular/theme';
+import { UpdateHistoriqueComponent } from '../update-historique/update-historique.component';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'ngx-historique',
@@ -63,7 +66,7 @@ export class HistoriqueComponent {
   source: LocalDataSource = new LocalDataSource();
   analyses: Analyse[];
 
-  constructor(private router: Router, private analyseService: AnalyseService) {
+  constructor(private router: Router, private analyseService: AnalyseService, private windowService: NbWindowService) {
     this.analyseService.findAll().subscribe(data => {
       this.analyses = data;
       this.data1 = this.generateData()
@@ -103,9 +106,12 @@ export class HistoriqueComponent {
     this.analyseService.deleteAnalyse(analyseId).subscribe(result => this.gotoAnalyseList());
   }
 
+  openWindowForm(analyseId: number, date: Date) {
+    this.windowService.open(UpdateHistoriqueComponent, { title: `Modifier une analyse`, context: { analyseId }});
+  }
+
   gotoAnalyseList() {
     window.location.reload();
-    // this.router.navigate(['/pages/historique']);
   }
 
   exportexcel(): void {
@@ -119,6 +125,16 @@ export class HistoriqueComponent {
 
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
+  }
+
+  exportCSV() {
+    const header = ['ID', 'Code Mission', 'Date', 'Nom de l\'unité', 'Nom du consultant'];
+    const rows = this.analyses.map((analyse) => [analyse.id, analyse.codeMission, analyse.date, analyse.unite.name, analyse.utilisateur.name]);
+  
+    const csvContent = [header, ...rows].map((row) => row.join(',')).join('\n');
+  
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
+    FileSaver.saveAs(blob, 'analyses.csv'); 
   }
 
   sortAnalysesById() {

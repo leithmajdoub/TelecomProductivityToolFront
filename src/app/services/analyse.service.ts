@@ -29,4 +29,10 @@ export class AnalyseService {
   public deleteAnalyse(analyseId: number) {
     return this.http.delete(`${this.baseUrl}/deleteanalyse?idanalyse=${analyseId}`);
   }
+
+  getAnalyseById(id: number): Observable<Analyse> {
+    return this.http.get<Analyse>(`${this.baseUrl}/findanalyse`, {
+      params: { idAnalyse: id.toString() }
+    });
+  }
 }

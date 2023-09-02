@@ -5,6 +5,7 @@ import { ActiviteService } from '../../../services/activite.service';
 import { NbWindowService } from '@nebular/theme';
 import * as XLSX from 'xlsx'; 
 import { UpdateActiviteComponent } from '../update-activite/update-activite.component';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'ngx-activite-list',
@@ -18,7 +19,7 @@ export class ActiviteListComponent implements OnInit {
   order = true;
   isDesc = false;
 
-  constructor(private route: ActivatedRoute, private router: Router, private activiteService: ActiviteService, private windowService: NbWindowService) {
+  constructor(private activiteService: ActiviteService, private windowService: NbWindowService) {
    }
 
   ngOnInit(): void {
@@ -33,11 +34,24 @@ export class ActiviteListComponent implements OnInit {
 
   gotoActiviteList() {
     window.location.reload();
-    // this.router.navigate(['/activite-list']);
   }
 
   openWindowForm(activiteId: number) {
-    this.windowService.open(UpdateActiviteComponent, { title: `Modifier une activité`, context: { activiteId } });
+    this.windowService.open(UpdateActiviteComponent, { title: `Modifier une activité`, context: { activiteId }});
+  }
+
+  exportCSV() {
+    const header = ['ID', '#Employes', 'Performance de l\'unite', 'Driver de productivité', 'Valeur du driver', 'Valeur minimale du driver', 'Valeur maximale du driver', 'Position contre le benchmark'];
+    const rows = this.activites.map((activite) => [
+      activite.id, activite.name, activite.nbEmployees, activite.unitPerformance, 
+      activite.driverProductivite, activite.valueDriverProductivite, activite.minValueBenchmarkDriverProductivite,
+      activite.maxValueBenchmarkDriverProductivite, activite.positionningAgainstBenchmark
+    ]);
+  
+    const csvContent = [header, ...rows].map((row) => row.join(',')).join('\n');
+  
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
+    FileSaver.saveAs(blob, 'activites.csv'); 
   }
 
   sortActiviteById() {

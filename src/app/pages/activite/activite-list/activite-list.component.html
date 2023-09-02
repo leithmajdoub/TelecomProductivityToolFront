@@ -5,8 +5,9 @@
 
     <nb-card-body >
       <div class="button-container">
-        <button status="success" outline nbButton (click)="exportexcel()">Exporter en Excel</button>
-      </div>
+        <button status="success" outline nbButton (click)="exportexcel()">Exporter en Excel <nb-icon icon="download-outline"></nb-icon></button>
+        <button status="info" outline nbButton (click)="exportCSV()">Exporter en CSV <nb-icon icon="download-outline"></nb-icon></button>
+    </div>
         <table id="excel-table" class="table table-bordered">
             <thead>
               <tr>

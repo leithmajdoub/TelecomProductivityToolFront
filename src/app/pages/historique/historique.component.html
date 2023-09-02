@@ -1,12 +1,13 @@
 <nb-card>
     <nb-card-header>
-        Historique des analyses de productivité
+        Historique des analyses de la productivité
     </nb-card-header>
 
     <nb-card-body>
         <div class="button-container">
-            <button status="success" outline nbButton (click)="exportexcel()">Exporter en Excel</button>
-          </div>
+            <button status="success" outline nbButton (click)="exportexcel()">Exporter en Excel <nb-icon icon="download-outline"></nb-icon></button>
+            <button status="info" outline nbButton (click)="exportCSV()">Exporter en CSV <nb-icon icon="download-outline"></nb-icon></button>
+        </div>
         <table id="excel-table" class="table table-bordered">
             <thead>
                 <tr>
@@ -26,12 +27,8 @@
                     <td>{{ item.nomUnite }}</td>
                     <td>{{ item.nomConsultant }}</td>
                     <td>
-                        <button nbButton ghost status="primary"><nb-icon icon="edit-outline" (click)="gotoAnalyseList()"></nb-icon></button>
-                        <!-- <button nbButton ghost status="success"><nb-icon icon="download-outline" (click)="exportexcel()" ></nb-icon></button> -->
+                        <button nbButton ghost status="primary"><nb-icon icon="edit-outline" (click)="openWindowForm(item.id)"></nb-icon></button>
                         <button nbButton ghost status="danger"><nb-icon icon="trash-outline" (click)="deleteAnalyse(item.id)"></nb-icon></button>
-                        <!-- <a style="cursor: pointer" (click)="exportexcel()">
-                            <mat-icon> cloud_download</mat-icon>
-                        </a> -->
                     </td>
                 </tr>
             </tbody>

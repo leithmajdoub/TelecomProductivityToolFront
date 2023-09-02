@@ -29,4 +29,10 @@ export class ActiviteService {
   public deleteActivite(activiteId: number) {
     return this.http.delete(`${this.baseUrl}/deleteactivite?idActivite=${activiteId}`);
   }
+
+  getActiviteById(id: number): Observable<Activite> {
+    return this.http.get<Activite>(`${this.baseUrl}/findactivite`, {
+      params: { idActivite: id.toString() }
+    });
+  }
 }

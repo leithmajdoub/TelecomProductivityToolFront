@@ -5,6 +5,7 @@ import { UniteService } from '../../../services/unite.service';
 import * as XLSX from 'xlsx';
 import { NbWindowService } from '@nebular/theme';
 import { UpdateUniteComponent } from '../update-unite/update-unite.component';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'ngx-unite-list',
@@ -56,6 +57,17 @@ export class UniteListComponent implements OnInit {
 
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
+  }
+
+  exportCSV() {
+    const header = ['ID', 'Nom', '# Employés']; // CSV header row
+    const rows = this.unites.map((unite) => [unite.id, unite.name, unite.nbEmployees]);
+  
+    // Add header and rows to form CSV content
+    const csvContent = [header, ...rows].map((row) => row.join(',')).join('\n');
+  
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
+    FileSaver.saveAs(blob, 'unités.csv'); // Save as 'unités.csv' or any desired file name
   }
 
   sortEmployeeById() {

@@ -28,6 +28,7 @@ import { RouterModule } from '@angular/router';
 import { NbInputModule } from '@nebular/theme';
 import { UpdateUniteComponent } from './Unite/update-unite/update-unite.component';
 import { UpdateActiviteComponent } from './activite/update-activite/update-activite.component';
+import { UpdateHistoriqueComponent } from './update-historique/update-historique.component';
 
 @NgModule({
   imports: [
@@ -65,6 +66,7 @@ import { UpdateActiviteComponent } from './activite/update-activite/update-activ
     ActiviteFormComponent,
     UpdateUniteComponent,
     UpdateActiviteComponent,
+    UpdateHistoriqueComponent,
   ],
 })
 export class PagesModule {

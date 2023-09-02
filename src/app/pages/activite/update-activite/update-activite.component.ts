@@ -13,10 +13,20 @@ export class UpdateActiviteComponent implements OnInit {
   activiteId: number;
   existingActivites: Activite[] = [];
 
-  constructor(private activiteService: ActiviteService) { }
+  constructor(private activiteService: ActiviteService) {
+    this.activite = new Activite();
+   }
 
   ngOnInit(): void {
+    this.fetchActivite();
   }
+
+  fetchActivite(): void {
+    this.activiteService.getActiviteById(this.activiteId).subscribe(data => {
+      this.activite = data;
+    });
+  }
+
   onSubmit() {
     this.activiteService.updateActivite(this.activite).subscribe(updateActivite => {
       console.log('Activité updated:', updateActivite);

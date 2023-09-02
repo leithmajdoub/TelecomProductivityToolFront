@@ -9,3 +9,10 @@
     text-align: right;
   }
   
+  .window-limited-height {
+    max-height: 10px !important;
+  }
+
+  .button-container button {
+    margin-right: 10px; /* Adjust the margin as needed */
+  }
