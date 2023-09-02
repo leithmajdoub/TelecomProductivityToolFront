@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbAccordionModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbListModule, NbMenuModule, NbRouteTabsetModule, NbSelectModule, NbStepperModule, NbTabsetModule, NbUserModule } from '@nebular/theme';
+import { NbAccordionModule, NbButtonComponent, NbButtonModule, NbCardModule, NbCheckboxModule, NbIconModule, NbListModule, NbMenuModule, NbRouteTabsetModule, NbSelectModule, NbStepperModule, NbTabsetModule, NbUserModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -20,6 +20,14 @@ import { DatepickerComponent } from './forms/datepicker/datepicker.component';
 import { ButtonsComponent } from './forms/buttons/buttons.component';
 import { FormsModule as ngFormsModule } from '@angular/forms';
 import { HistoriqueComponent } from './historique/historique.component';
+import { UniteListComponent } from './Unite/unite-list/unite-list.component';
+import { UniteFormComponent } from './Unite/unite-form/unite-form.component';
+import { ActiviteListComponent } from './activite/activite-list/activite-list.component';
+import { ActiviteFormComponent } from './activite/activite-form/activite-form.component';
+import { RouterModule } from '@angular/router';
+import { NbInputModule } from '@nebular/theme';
+import { UpdateUniteComponent } from './Unite/update-unite/update-unite.component';
+import { UpdateActiviteComponent } from './activite/update-activite/update-activite.component';
 
 @NgModule({
   imports: [
@@ -42,12 +50,21 @@ import { HistoriqueComponent } from './historique/historique.component';
     NbCheckboxModule,
     NbSelectModule,
     NgxSliderModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    RouterModule,
+    NbInputModule,
+    NbIconModule,
   ],
   declarations: [
     PagesComponent,
     AnalyseavanceeComponent,
     HistoriqueComponent,
+    UniteListComponent,
+    UniteFormComponent,
+    ActiviteListComponent,
+    ActiviteFormComponent,
+    UpdateUniteComponent,
+    UpdateActiviteComponent,
   ],
 })
 export class PagesModule {

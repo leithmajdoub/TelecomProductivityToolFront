@@ -1,0 +1,32 @@
+<nb-card>
+  <nb-card-header>
+      Liste des unités
+  </nb-card-header>
+
+  <nb-card-body >
+    <div class="button-container">
+      <button status="success" outline nbButton (click)="exportexcel()">Exporter en Excel</button>
+    </div>
+      <table id="excel-table" class="table table-bordered">
+          <thead>
+              <tr>
+                <th nbSort (click)="sortEmployeeById()">#</th>
+                <th (click)="sortName('name')">Nom</th>
+                <th nbSort (click)="sortEmployeeByNbEmployes()">#Employés</th>
+                <th>Actions</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let unite of unites">
+                <td>{{ unite.id }}</td>
+                <td>{{ unite.name }}</td>
+                <td>{{ unite.nbEmployees }}</td>
+                  <td>
+                      <button nbButton ghost status="primary"><nb-icon icon="edit-outline" (click)="openWindowForm(unite.id)"></nb-icon></button>
+                      <button nbButton ghost status="danger"><nb-icon icon="trash-outline" (click)="deleteunite(unite.id)"></nb-icon></button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </nb-card-body>
+</nb-card>

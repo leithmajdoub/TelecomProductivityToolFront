@@ -12,15 +12,29 @@ export class UniteService {
   private baseUrl: String;
 
   constructor(private http: HttpClient) { 
-    this.baseUrl = 'http://localhost:8080/unite';
+    this.baseUrl = 'http://localhost:8089/unite';
   }
 
   public findAll(): Observable<Unite[]> {
-    return this.http.get<Unite[]>(`${this.baseUrl}`);
+    return this.http.get<Unite[]>(`${this.baseUrl}/listunites`);
   }
 
-  public createUnite(unite: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, unite);
+  public createUnite(unite: Unite) {
+    return this.http.post(`${this.baseUrl}/addunite`, unite);
   }
 
+  public deleteUnite(uniteId: number) {
+    return this.http.delete(`${this.baseUrl}/deleteunite?idUnite=${uniteId}`);
+  }
+
+  public updateUnite(unite: Unite) {
+    return this.http.put(`${this.baseUrl}/updateunite`, unite);
+  }
+
+  getUniteById(id: number): Observable<Unite> {
+    return this.http.get<Unite>(`${this.baseUrl}/findunite`, {
+      params: { idUnite: id.toString() }
+    });
+  }
 }
+

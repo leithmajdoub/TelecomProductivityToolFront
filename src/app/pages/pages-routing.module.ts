@@ -7,6 +7,10 @@ import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { AnalyseavanceeComponent } from './analyseavancee/analyseavancee.component';
 import { HistoriqueComponent } from './historique/historique.component';
+import { UniteListComponent } from './Unite/unite-list/unite-list.component';
+import { UniteFormComponent } from './Unite/unite-form/unite-form.component';
+import { ActiviteFormComponent } from './activite/activite-form/activite-form.component';
+import { ActiviteListComponent } from './activite/activite-list/activite-list.component';
 
 const routes: Routes = [{
   path: '',
@@ -15,6 +19,22 @@ const routes: Routes = [{
     {
       path: 'analyseavancee',
       component: AnalyseavanceeComponent,
+    },
+    {
+      path: 'unite-list',
+      component: UniteListComponent,
+    },
+    {
+      path: 'unite-form',
+      component: UniteFormComponent,
+    },
+    {
+      path: 'activite-form',
+      component: ActiviteFormComponent,
+    },
+    {
+      path: 'activite-list',
+      component: ActiviteListComponent,
     },
     {
       path: 'historique',
@@ -78,11 +98,11 @@ const routes: Routes = [{
       loadChildren: () => import('./miscellaneous/miscellaneous.module')
         .then(m => m.MiscellaneousModule),
     },
-    {
-      path: '',
-      redirectTo: 'analyseavancee',
-      pathMatch: 'full',
-    },
+    // {
+    //   path: '',
+    //   redirectTo: 'analyseavancee',
+    //   pathMatch: 'full',
+    // },
     {
       path: '**',
       component: NotFoundComponent,

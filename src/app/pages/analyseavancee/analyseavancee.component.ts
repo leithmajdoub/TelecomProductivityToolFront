@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Options } from '@angular-slider/ngx-slider';
 import { Unite } from '../../models/Unite';
 import { UniteService } from '../../services/unite.service';
+import { ActiviteService } from '../../services/activite.service';
+import { Activite } from '../../models/Activite';
 
 @Component({
   selector: 'ngx-analyseavancee',
@@ -12,19 +14,29 @@ import { UniteService } from '../../services/unite.service';
 export class AnalyseavanceeComponent implements OnInit {
 
   unite: Unite;
+  activite: Activite;
+  selectedItemsB2B: string[];
+  selectedItemsServiceClient: string[];
+  selectedItemsTransformationInnovation: string[];
+  selectedItemsReseau: string[];
+  isConcatenationDone = false;
 
-  minValue: number = 50;
+  realActivitiesList: Activite[];
+
+  @ViewChild('stepper') stepper: any;
+
+  minValue: number = 30;
   maxValue: number = 200;
   minValue1: number = 50;
-  maxValue1: number = 200;
-  minValue2: number = 50;
-  maxValue2: number = 200;
+  maxValue1: number = 250;
+  minValue2: number = 20;
+  maxValue2: number = 60;
   minValue3: number = 50;
-  maxValue3: number = 200;
-  minValue4: number = 50;
-  maxValue4: number = 200;
-  minValue5: number = 50;
-  maxValue5: number = 200;
+  maxValue3: number = 100;
+  minValue4: number = 30;
+  maxValue4: number = 150;
+  minValue5: number = 20;
+  maxValue5: number = 170;
   options: Options = {
     floor: 0,
     ceil: 250
@@ -34,17 +46,27 @@ export class AnalyseavanceeComponent implements OnInit {
   secondForm: UntypedFormGroup;
   thirdForm: UntypedFormGroup;
   fourthForm: UntypedFormGroup;
-  activitiesList: String[] = ["Identifier les clients prospects stratégiques", 
-                              "Présenter les produits et services de l’opérateur aux clients prospects",
-                              "Intervenir sur le plus de pannes possible",
-                              "Effectuer des changements sur le réseau",
-                              "Monitoring de la performance réseau",
-                              "Implémenter les mesures de sécurité réseau (SOC)"];
+  // activitiesList: String[] = ["Identifier les clients prospects stratégiques", 
+  //                             "Présenter les produits et services de l’opérateur aux clients prospects",
+  //                             "Intervenir sur le plus de pannes possible",
+  //                             "Effectuer des changements sur le réseau",
+  //                             "Monitoring de la performance réseau",
+  //                             "Implémenter les mesures de sécurité réseau (SOC)"];
+  activitiesList: string[];
   fifthForm: UntypedFormGroup;
 
 
-  constructor(private fb: UntypedFormBuilder, private uniteService: UniteService) {
+  constructor(private fb: UntypedFormBuilder, private uniteService: UniteService, private activiteService: ActiviteService) {
     this.unite = new Unite();
+    this.activite = new Activite();
+
+    this.activitiesList = [];
+    this.realActivitiesList = [];
+    
+    this.selectedItemsB2B = [];
+    this.selectedItemsServiceClient = [];
+    this.selectedItemsTransformationInnovation = [];
+    this.selectedItemsReseau = [];
   }
 
   ngOnInit() {
@@ -57,6 +79,8 @@ export class AnalyseavanceeComponent implements OnInit {
     });
 
     this.thirdForm = this.fb.group({
+      // nbEmployees: new FormControl(''),
+      // valueDriverProductivite: new FormControl(''),
       thirdCtrl: [''],
     });
 
@@ -69,6 +93,7 @@ export class AnalyseavanceeComponent implements OnInit {
     this.uniteService
     .createUnite(this.unite).subscribe(data => {
         console.log(data)
+        this.stepper.next();
       },
         error => console.log(error));
 
@@ -77,10 +102,66 @@ export class AnalyseavanceeComponent implements OnInit {
   }
 
   onSecondSubmit() {
+
+    // here 
+    this.realActivitiesList = [];
+    // console.log(this.selectedItemsB2B)
+    // console.log(this.selectedItemsTransformationInnovation)
+    // console.log(this.selectedItemsServiceClient)
+
+    for (var item of this.selectedItemsB2B) {
+      this.activite = new Activite();
+      this.activite.name = item;
+      this.activiteService.createActivite(this.activite).subscribe(data => {
+        // this.realActivitiesList.push(this.activite);
+      },
+        error => console.log(error));
+    }
+
+    for (var item of this.selectedItemsTransformationInnovation) {
+      this.activite = new Activite();
+      this.activite.name = item;
+      this.activiteService.createActivite(this.activite).subscribe(data => {
+        // this.realActivitiesList.push(this.activite);
+        // console.log(data)
+      },
+        error => console.log(error));
+    }
+
+    for (var item of this.selectedItemsServiceClient) {
+      this.activite = new Activite();
+      this.activite.name = item;
+      this.activiteService.createActivite(this.activite).subscribe(data => {
+        // this.realActivitiesList.push(this.activite);
+        // console.log(data)
+      },
+        error => console.log(error));
+    }
+
+    // console.log(this.realActivitiesList)
+    this.activitiesList = this.selectedItemsB2B.concat(this.selectedItemsTransformationInnovation, this.selectedItemsServiceClient);
+    for (let i = 0; i < this.activitiesList.length; i++ ) {
+      this.activite = new Activite();
+      this.activite.name = this.activitiesList[i];
+      console.log(this.activite)
+      this.realActivitiesList.push(this.activite);
+      console.log(this.realActivitiesList)
+    }
+    // this.realActivitiesList = this.activitiesList.map(a => Object.assign(new Activite(), a));  
     this.secondForm.markAsDirty();
+
+    this.isConcatenationDone = true;
   }
 
   onThirdSubmit() {
+    for (var item of this.realActivitiesList) {
+      this.activite = item;
+      this.activiteService.updateActivite(this.activite).subscribe(data => {
+        console.log(data)
+      },
+        error => console.log(error));
+    }
+    // console.log(this.realActivitiesList);
     this.thirdForm.markAsDirty();
   }
 
@@ -90,6 +171,10 @@ export class AnalyseavanceeComponent implements OnInit {
 
   onFifthSubmit() {
     this.fourthForm.markAsDirty();
+  }
+
+  trackByFn(item: Activite) {
+    return item.id; // or any other unique identifier for the item
   }
 
 }

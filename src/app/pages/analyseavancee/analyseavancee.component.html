@@ -3,176 +3,203 @@
     <nb-card>
       <nb-card-body>
         <nb-stepper #stepper>
-          <nb-step [stepControl]="firstForm" label="Étape 1">
-            <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
-              <p class="lorem">
-                Quel est le nom de l’unité ?
-              </p>
-              <div class="input-group">
 
-                <input type="text" placeholder="Nom" class="form-control small-input" formControlName="firstCtrl"
-                  style="width: 200px;"
-                  [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}" [(ngModel)]="unite.name">
+          <nb-step [stepControl]="firstForm" label="Étape 1">
+            <div class="card my-5">
+              <div class="card-body">
+                <form (ngSubmit)="onFirstSubmit()" #uniteForm="ngForm">
+                  <div class="form-group">
+                    <label for="name"> <b>Quel est le nom de l'unité ?</b></label>
+                    <input type="text" nbInput fullWidth shape="semi-round" [(ngModel)]="unite.name" #name="ngModel"
+                      placeholder="Nom de l'unité" id="name" name="name" required>
+                  </div>
+                  <div [hidden]="!name.touched || name.valid" class="alert alert-danger">Le nom de l'unité est un champ
+                    requis</div>
+                  <div class="form-group">
+                    <label for="nbEmployees"><b>Quel est le nombre d'employés de l'unité ?</b></label>
+                    <input type="text" nbInput fullWidth [(ngModel)]="unite.nbEmployees" shape="semi-round"
+                      id="nbEmployees" name="nbEmployees" placeholder="Nombre d'employés de l'unité" required
+                      #nbEmployees="ngModel">
+                  </div>
+                  <div [hidden]="!nbEmployees.touched || nbEmployees.valid" class="alert alert-danger">Le nombre
+                    d'employés est un champ
+                    requis</div>
+                  <button type="submit" [disabled]="!uniteForm.form.valid" class="btn btn-info">Suivant</button>
+                </form>
               </div>
-              <br>
-              <br>
-              <p class="lorem">
-                Quel est la taille de l’unité ?
-              </p>
-              <div class="input-group">
-                <input type="text" placeholder="Taille" class="form-control" formControlName="firstCtrl"
-                  [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}" [(ngModel)]="unite.nbEmployees" >
-              </div>
-              <button type="submit" nbButton nbStepperNext>Suivant</button>
-            </form>
+            </div>
           </nb-step>
 
-          <!-- <nb-step [stepControl]="secondForm" label="Second step">
-            <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
-              <p class="lorem">
-                Pellentesque we gonna chung tortor.
-                Sizzle pizzle. Fizzle izzle dolor dapibus fo shizzle mah nizzle fo rizzle, mah home g-dizzle tempus tempor.
-                Maurizzle cool nibh owned turpizzle. My shizz fo shizzle tortor.
-              </p>
-              <div class="input-group">
-                <input type="text" placeholder="Enter favorite movie" class="form-control" formControlName="secondCtrl"
-                       [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
-              </div>
-              <button nbButton nbStepperPrevious>prev</button>
-              <button nbButton nbStepperNext>next</button>
-            </form>
-          </nb-step> -->
-
-          <nb-step [stepControl]="secondForm" label="Second step">
-            <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
+          <nb-step [stepControl]="secondForm" label="Étape 2">
+            <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container" #activiteForm="ngForm">
               <nb-card>
                 <nb-card-header>Selectionnez les activités de l'unité</nb-card-header>
                 <nb-card-body>
                   <div>
                     <p class="lorem">
-                      B2B
+                      <b>B2B</b>
                     </p>
-                    <nb-select selected="1" multiple>
-                      <nb-option value="1">Signer des contrats</nb-option>
-                      <nb-option value="2">Approcher les prospects</nb-option>
-                      <nb-option value="3">Identifier les prospects</nb-option>
+                    <nb-select selected="1" shape="semi-round" multiple fullWidth [(selected)]="selectedItemsB2B">
+                      <nb-option value="Identifier les clients prospects stratégiques ">Identifier les clients prospects stratégiques </nb-option>
+                      <nb-option value="Approcher les clients prospects stratégiques ">Approcher les clients prospects stratégiques </nb-option>
+                      <nb-option value="Présenter les produits et services de l’opérateur aux clients prospects">Présenter les produits et services de l’opérateur aux clients prospects</nb-option>
+                      <nb-option value="Mieux comprendre le besoin et les attentes des clients grâce au feedback">Mieux comprendre le besoin et les attentes des clients grâce au feedback</nb-option>
+                      <nb-option value="Développer les propositions les plus adéquates aux besoins du client">Développer les propositions les plus adéquates aux besoins du client</nb-option>
+                      <nb-option value="Négocier des contrats de vente ">Négocier des contrats de vente </nb-option>
+                      <nb-option value="Signer des contrats de vente ">Signer des contrats de vente </nb-option>
+                      <nb-option value="Atteindre ou dépasser les objectifs de vente">Atteindre ou dépasser les objectifs de vente</nb-option>
+                      <nb-option value="Comparer les produits de l’opérateur avec ses concurrents">Comparer les produits de l’opérateur avec ses concurrents</nb-option>
+                      <nb-option value="Monitorer les potentielles menaces pour les activités B2B de l’opérateur">Monitorer les potentielles menaces pour les activités B2B de l’opérateur</nb-option>
+                      <nb-option value="Analyser les tendances du marché">Analyser les tendances du marché</nb-option>
                     </nb-select>
                   </div>
                   <br><br>
                   <div>
                     <p class="lorem">
-                      Transformation et innovation
+                      <b>Transformation et innovation</b>
                     </p>
-                    <nb-select selected="1" multiple>
-                      <nb-option value="1">Exécuter des projets de transformation digitale</nb-option>
-                      <nb-option value="2">Faire évoluer le taux de satisfaction des clients</nb-option>
+                    <nb-select selected="1" shape="semi-round" multiple fullWidth
+                      [(selected)]="selectedItemsTransformationInnovation">
+                      <nb-option value="Exécuter des projets de transformation digitale">Exécuter des projets de
+                        transformation digitale</nb-option>
+                      <nb-option value="Faire évoluer les transactions digitales">Faire évoluer les transactions
+                        digitales</nb-option>
+                      <nb-option value="Respecter le time to market des projets de transformation digitale">Respecter le
+                        time to market des projets de transformation digitale</nb-option>
+                      <nb-option value="Exécuter des projets d’innovation en marketing produit">Exécuter des projets
+                        d’innovation en marketing produit</nb-option>
+                      <nb-option value="Faire évoluer le taux de satisfaction des clients">Faire évoluer le taux de
+                        satisfaction des clients</nb-option>
+                      <nb-option value="Exécuter des projets de transformation produit">Exécuter des projets de
+                        transformation produit</nb-option>
+                      <nb-option value="Rédiger des rapport d'analyse du risque">Rédiger des rapport d'analyse du
+                        risque</nb-option>
+                      <nb-option value="Rédiger des rapport d'analyse des tendances">Rédiger des rapport d'analyse des
+                        tendances</nb-option>
                     </nb-select>
                   </div>
                   <br><br>
                   <div>
                     <p class="lorem">
-                      Service client
+                      <b>Service client</b>
                     </p>
-                    <nb-select selected="1" multiple>
-                      <nb-option value="1">Traiter les réclamations des clients</nb-option>
-                      <nb-option value="2">Répondre aux questions des clients sur les produits et services de
+                    <nb-select selected="1" shape="semi-round" multiple fullWidth
+                      [(selected)]="selectedItemsServiceClient">
+                      <nb-option value="Traiter les réclamations des clients">Traiter les réclamations des
+                        clients</nb-option>
+                      <nb-option value="Répondre aux questions des clients sur les produits et services de
+                      l’opérateur">Répondre aux questions des clients sur les produits et services de
                         l’opérateur</nb-option>
+                      <nb-option value="Répondre aux autres requetes des clients">Répondre aux autres requetes des
+                        clients</nb-option>
+                    </nb-select>
+                  </div>
+                  <br><br>
+                  <div>
+                    <p class="lorem">
+                      <b>Réseau</b>
+                    </p>
+                    <nb-select selected="1" shape="semi-round" multiple fullWidth
+                      [(selected)]="selectedItemsReseau">
+                      <nb-option value="Diagnostiquer les pannes">Diagnostiquer les pannes</nb-option>
+                      <nb-option value="Réparer les pannes le plus vite possible">Réparer les pannes le plus vite
+                        possible</nb-option>
+                      <nb-option value="Intervenir sur des pannes possible">Intervenir sur des pannes
+                        possible</nb-option>
+                      <nb-option value="Arriver au site de la panne le plus rapidement possible">Arriver au site de la
+                        panne le plus rapidement possible</nb-option>
+                      <nb-option value="Effectuer des changements sur le réseau">Effectuer des changements sur le
+                        réseau</nb-option>
+                      <nb-option value="Effectuer des audits réseau">Effectuer des audits réseau</nb-option>
+                      <nb-option value="Monitoring de la performance réseau">Monitoring de la performance
+                        réseau</nb-option>
+                      <nb-option value="Tenir un plan de maintenance réseau">Tenir un plan de maintenance
+                        réseau</nb-option>
+                      <nb-option value="Faire la maintenance de l'infrastructure réseau">Faire la maintenance de
+                        l'infrastructure réseau</nb-option>
+                      <nb-option value="Implémenter les mesures de sécurité réseau">Implémenter les mesures de sécurité
+                        réseau</nb-option>
                     </nb-select>
                   </div>
                 </nb-card-body>
               </nb-card>
-              <button nbButton nbStepperPrevious>Précédant</button>
-              <button nbButton nbStepperNext>Suivant</button>
+              <button nbButton nbStepperPrevious class="btn btn-info">Précédant</button>
+              <button type="submit" class="btn btn-info">Valider</button>
+              <button nbButton nbStepperNext class="btn btn-info" [disabled]="!isConcatenationDone">Suivant</button>
             </form>
           </nb-step>
 
-          <!-- <nb-step [stepControl]="thirdForm" label="Third step">
-            <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
-              <p class="lorem">
-                Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
-              </p>
-              <div class="input-group">
-                <input type="text" placeholder="Enter something" class="form-control" formControlName="thirdCtrl"
-                  [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+          <nb-step [stepControl]="thirdForm" label="Étape 3">
+            <div class="card my-5">
+              <div class="card-body">
+                <form (ngSubmit)="onThirdSubmit()" #driverForm="ngForm">
+                  <nb-list nbInfiniteList listenWindowScroll>
+                    <nb-list-item *ngFor="let act of realActivitiesList" class="center-labels">
+
+                      <div class="input-container">
+                        <label>
+                          Combien d’employés travaillent sur l’activité ?
+                          <br>
+                          <input type="text" nbInput fullWidth shape="semi-round" placeholder="{{act.name}}"
+                            name="nbEmployees" id="nbEmployees" required>
+                        </label>
+                        <br>
+                        <label>
+                          Quelle est la valeur du driver de productivité ?
+                          <br>
+                          <input type="text" nbInput fullWidth shape="semi-round"
+                            placeholder="Valeur du driver de productivité" name="valueDriverProductivite"
+                            id="valueDriverProductivite" required>
+                        </label>
+                      </div>
+                    </nb-list-item>
+                  </nb-list>
+                  <button nbButton nbStepperPrevious class="btn btn-info">Précédant</button>
+                  <button nbButton nbStepperNext type="submit" [disabled]="!driverForm.form.valid"
+                    class="btn btn-info">Suivant</button>
+                </form>
               </div>
-              <button nbButton nbStepperPrevious>prev</button>
-              <button nbButton nbStepperNext>Confirm</button>
-            </form>
-
-
-          </nb-step> -->
-
-          <nb-step [stepControl]="thirdForm" label="Third step">
-
-            <div class="col-md-12 col-xxl-12 col-xxxl-12">
-
-              <nb-card>
-                <nb-card-header>Valeurs des drivers des productivité</nb-card-header>
-                <nb-list nbInfiniteList listenWindowScroll>
-                  <nb-list-item *ngFor="let act of activitiesList">
-
-                    <div class="center-labels">
-                      <label>
-                        Combien d’employés travaillent sur l’activité ?
-                        <input type="text" placeholder="{{act}}" class="form-control" formControlName="firstCtrl"
-                          [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
-                      </label>
-          
-                      <label>
-                        Quelle est la valeur du driver de productivité ?
-                        <input type="text" placeholder="Valeur du driver" class="form-control" formControlName="firstCtrl"
-                          [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
-                      </label>
-                    </div>
-                  
-                  </nb-list-item>
-                </nb-list>
-              </nb-card>
-              <button nbButton nbStepperPrevious>Précédant</button>
-              <button nbButton nbStepperNext>Suivant</button>
             </div>
           </nb-step>
 
-          <!-- <nb-step [stepControl]="thirdForm" [hidden]="true" label="Thirs step">
-            <div class="step-container">
-              <h3>Wizard completed!</h3>
-              <button nbButton (click)="stepper.reset()">Try again</button>
-            </div>
-          </nb-step> -->
-
-          <nb-step [stepControl]="fourthForm" label="Fourth step">
+          <nb-step [stepControl]="fourthForm" label="Étape 4">
             <nb-card-header>Résultat de l’analyse avancée</nb-card-header>
-            <div class="col-md-12 col-xxl-12 col-xxxl-12">
 
-              <!-- <p>Min value: <input type="number" [(ngModel)]="minValue"></p>
-              <p>Max value: <input type="number" [(ngModel)]="maxValue"></p> -->
+            <div class="col-md-12 col-xxl-12 col-xxxl-12">
               <br>
               <p>Identifier les clients prospects stratégiques</p>
+              <button nbButton status="success">Performance idéale</button>
               <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ngx-slider>
+
             </div>
             <div class="col-md-12 col-xxl-12 col-xxxl-12">
               <br>
               <p>Présenter les produits et services de l’opérateur aux clients prospects</p>
+              <button nbButton status="danger">Sous-performance</button>
               <ngx-slider [(value)]="minValue1" [(highValue)]="maxValue1" [options]="options"></ngx-slider>
             </div>
-            <div class="col-md-12 col-xxl-12 col-xxxl-12">
+            <!-- <div class="col-md-12 col-xxl-12 col-xxxl-12">
               <br>
               <p>Intervenir sur le plus de pannes possible</p>
+              <button nbButton status="danger">Sous-performance</button>
               <ngx-slider [(value)]="minValue2" [(highValue)]="maxValue2" [options]="options"></ngx-slider>
-            </div>
+            </div> -->
             <div class="col-md-12 col-xxl-12 col-xxxl-12">
               <br>
               <p>Effectuer des changements sur le réseau</p>
+              <button nbButton status="warning">Sur-performance</button>
               <ngx-slider [(value)]="minValue3" [(highValue)]="maxValue3" [options]="options"></ngx-slider>
             </div>
             <div class="col-md-12 col-xxl-12 col-xxxl-12">
               <br>
               <p>Monitoring de la performance réseau</p>
+              <button nbButton status="success">Performance idéale</button>
               <ngx-slider [(value)]="minValue4" [(highValue)]="maxValue4" [options]="options"></ngx-slider>
             </div>
             <div class="col-md-12 col-xxl-12 col-xxxl-12">
               <br>
               <p>Implémenter les mesures de sécurité réseau (SOC)</p>
+              <button nbButton status="success">Performance idéale</button>
               <ngx-slider [(value)]="minValue5" [(highValue)]="maxValue5" [options]="options"></ngx-slider>
             </div>
             <button nbButton nbStepperPrevious>Précédant</button>

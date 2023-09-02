@@ -22,6 +22,8 @@ import {
   NbStepperModule
 } from '@nebular/theme';
 
+import { AuthModule } from '@auth0/auth0-angular';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -38,6 +40,13 @@ import {
     NbToastrModule.forRoot(),
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    }),
+    AuthModule.forRoot({
+      domain: 'dev-w55xjf6tp6q1obzz.us.auth0.com',
+      clientId: 'stlRgpYsAzHrilM5s0Fe8Vqtb5WOfifJ',
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),

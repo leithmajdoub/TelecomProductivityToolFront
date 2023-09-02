@@ -1,0 +1,44 @@
+  <nb-card>
+    <nb-card-header>
+        Liste des activités
+    </nb-card-header>
+
+    <nb-card-body >
+      <div class="button-container">
+        <button status="success" outline nbButton (click)="exportexcel()">Exporter en Excel</button>
+      </div>
+        <table id="excel-table" class="table table-bordered">
+            <thead>
+              <tr>
+                <th (click)="sortActiviteById()">#</th>
+                <th (click)="sortActiviteByName('name')">Nom</th>
+                <th (click)="sortActiviteByNbEmplyes()">#Employes</th>
+                <th (click)="sortActiviteByPerformance()">Performance de l'unite</th>
+                <th (click)="sortActiviteByDriver('driverProductivite')">Driver de productivité</th>
+                <th (click)="sortActiviteByValeurDriver()">Valeur du driver</th>
+                <th (click)="sortActiviteByValeurMinDriver()">Valeur minimale du driver</th>
+                <th (click)="sortActiviteByValeurMaxDriver()">Valeur maximale du driver</th>
+                <th>Position contre le benchmark</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let activite of activites">
+                  <td>{{ activite.id }}</td>
+                  <td>{{ activite.name }}</td>
+                  <td>{{ activite.nbEmployees }}</td>
+                  <td>{{ activite.unitPerformance }}</td>
+                  <td>{{ activite.driverProductivite }}</td>
+                  <td>{{ activite.valueDriverProductivite }}</td>
+                  <td>{{ activite.minValueBenchmarkDriverProductivite }}</td>
+                  <td>{{ activite.maxValueBenchmarkDriverProductivite }}</td>
+                  <td>{{ activite.positionningAgainstBenchmark }}</td>
+                    <td>
+                        <button nbButton ghost status="primary"><nb-icon icon="edit-outline" (click)="openWindowForm(activite.id)"></nb-icon></button>
+                        <button nbButton ghost status="danger"><nb-icon icon="trash-outline" (click)="deleteactivite(activite.id)"></nb-icon></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </nb-card-body>
+</nb-card>

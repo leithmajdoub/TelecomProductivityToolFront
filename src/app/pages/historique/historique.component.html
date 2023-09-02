@@ -1,10 +1,40 @@
 <nb-card>
     <nb-card-header>
-        Historique
+        Historique des analyses de productivité
     </nb-card-header>
 
     <nb-card-body>
-        <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
-        </ng2-smart-table>
+        <div class="button-container">
+            <button status="success" outline nbButton (click)="exportexcel()">Exporter en Excel</button>
+          </div>
+        <table id="excel-table" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th (click)="sortAnalysesById()">ID</th>
+                    <th (click)="sortAnalysesByCodeMission()">Code Mission</th>
+                    <th>Date</th>
+                    <th (click)="sortAnalysesByNomUnite('nomUnite')">Unité analysée</th>
+                    <th>Consultant</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of data1">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.codeMission }}</td>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.nomUnite }}</td>
+                    <td>{{ item.nomConsultant }}</td>
+                    <td>
+                        <button nbButton ghost status="primary"><nb-icon icon="edit-outline" (click)="gotoAnalyseList()"></nb-icon></button>
+                        <!-- <button nbButton ghost status="success"><nb-icon icon="download-outline" (click)="exportexcel()" ></nb-icon></button> -->
+                        <button nbButton ghost status="danger"><nb-icon icon="trash-outline" (click)="deleteAnalyse(item.id)"></nb-icon></button>
+                        <!-- <a style="cursor: pointer" (click)="exportexcel()">
+                            <mat-icon> cloud_download</mat-icon>
+                        </a> -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </nb-card-body>
 </nb-card>

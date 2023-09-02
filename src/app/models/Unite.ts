@@ -1,6 +1,14 @@
+import { Activite } from "./Activite";
+
 export class Unite {
-    // Keep as String or change to int?
-    id: string;
+    id: number;
     name: string;
-    nbEmployees: string;
+    nbEmployees: number;
+    activites: Activite[] = [];
+
+    constructor(name: string = '', nbEmployees: number = null, activites: Activite[] = []) {
+        this.name = name;
+        this.nbEmployees = nbEmployees;
+        this.activites = activites;
+      }
 }

@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 
 import { SmartTableData } from '../../@core/data/smart-table';
+import { AnalyseService } from '../../services/analyse.service';
+import { Analyse } from '../../models/Analyse';
+import { Router } from '@angular/router';
+import * as XLSX from 'xlsx';
+import jsPDF from 'jspdf';
+import autoTable from "jspdf-autotable"
 
 @Component({
   selector: 'ngx-historique',
@@ -9,13 +15,16 @@ import { SmartTableData } from '../../@core/data/smart-table';
   styleUrls: ['./historique.component.scss']
 })
 export class HistoriqueComponent {
+  fileName = 'HistoriqueAnalyses.xlsx';
+  order = true;
+  isDesc = false;
 
   settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
+    // add: {
+    //   addButtonContent: '<i class="nb-plus"></i>',
+    //   createButtonContent: '<i class="nb-checkmark"></i>',
+    //   cancelButtonContent: '<i class="nb-close"></i>',
+    // },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
@@ -27,37 +36,41 @@ export class HistoriqueComponent {
     },
     columns: {
       id: {
-        title: 'CODE MISSION',
+        title: 'ID',
         type: 'number',
       },
-      firstName: {
-        title: 'UNITÉ',
-        type: 'string',
-      },
-      lastName: {
-        title: 'DATE',
-        type: 'string',
-      },
-      username: {
-        title: '#EMPLOYÉS',
-        type: 'string',
-      },
-      email: {
-        title: 'E-mail',
-        type: 'string',
-      },
-      age: {
-        title: 'Age',
+      codeMission: {
+        title: 'Code Mission',
         type: 'number',
+      },
+      date: {
+        title: 'Date',
+        type: 'date',
+      },
+      nomUnite: {
+        title: 'Unité analysée',
+        type: 'string',
+      },
+      nomConsultant: {
+        title: 'Consultant',
+        type: 'string',
       },
     },
   };
 
-  source: LocalDataSource = new LocalDataSource();
+  data1 = [];
 
-  constructor(private service: SmartTableData) {
-    const data = this.service.getData();
-    this.source.load(data);
+  source: LocalDataSource = new LocalDataSource();
+  analyses: Analyse[];
+
+  constructor(private router: Router, private analyseService: AnalyseService) {
+    this.analyseService.findAll().subscribe(data => {
+      this.analyses = data;
+      this.data1 = this.generateData()
+      console.log(this.data1)
+      this.source.load(this.data1);
+    });
+
   }
 
   onDeleteConfirm(event): void {
@@ -68,4 +81,85 @@ export class HistoriqueComponent {
     }
   }
 
+  getNewObj(analyse: Analyse): any {
+    return {
+      id: analyse.id,
+      date: analyse.date,
+      codeMission: analyse.codeMission,
+      nomUnite: analyse.unite.name,
+      nomConsultant: analyse.utilisateur.name,
+    };
+  }
+
+  generateData(): Array<any> {
+    const data = [];
+    for (let i = 0; i < this.analyses.length; i++) {
+      data.push(this.getNewObj(this.analyses[i]));
+    }
+    return data;
+  }
+
+  deleteAnalyse(analyseId: number) {
+    this.analyseService.deleteAnalyse(analyseId).subscribe(result => this.gotoAnalyseList());
+  }
+
+  gotoAnalyseList() {
+    window.location.reload();
+    // this.router.navigate(['/pages/historique']);
+  }
+
+  exportexcel(): void {
+    /* table id is passed over here */
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
+  }
+
+  sortAnalysesById() {
+    if (this.order) {
+      let newArray = this.data1.sort((a: any, b: any) => b.id - a.id)
+      this.data1 = newArray
+    }
+    else {
+      let newArray = this.data1.sort((a: any, b: any) => a.id - b.id)
+      this.data1 = newArray
+    }
+    this.order = !this.order
+  }
+
+  sortAnalysesByCodeMission() {
+    if (this.order) {
+      let newArray = this.data1.sort((a: any, b: any) => b.codeMission - a.codeMission)
+      this.data1 = newArray
+    }
+    else {
+      let newArray = this.data1.sort((a: any, b: any) => a.codeMission - b.codeMission)
+      this.data1 = newArray
+    }
+    this.order = !this.order
+  }
+
+  sortAnalysesByNomUnite(property){
+    this.isDesc = !this.isDesc;
+
+    let direction = this.isDesc ? 1: -1;
+
+    this.data1.sort(function(a,b){
+      if (a[property] < b[property]){
+        return -1 * direction;
+      }
+      else if (a[property] > b[property]){
+        return 1 * direction;
+      }
+      else{
+        return 0;
+      }
+    });
+  }
 }
