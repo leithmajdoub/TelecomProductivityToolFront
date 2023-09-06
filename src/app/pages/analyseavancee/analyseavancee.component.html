@@ -24,7 +24,7 @@
                   <div [hidden]="!nbEmployees.touched || nbEmployees.valid" class="alert alert-danger">Le nombre
                     d'employés est un champ
                     requis</div>
-                  <button type="submit" [disabled]="!uniteForm.form.valid" class="btn btn-info">Suivant</button>
+                  <button nbButton nbStepperNext type="submit" [disabled]="!uniteForm.form.valid" class="btn btn-info">Suivant</button>
                 </form>
               </div>
             </div>
@@ -40,16 +40,26 @@
                       <b>B2B</b>
                     </p>
                     <nb-select selected="1" shape="semi-round" multiple fullWidth [(selected)]="selectedItemsB2B">
-                      <nb-option value="Identifier les clients prospects stratégiques ">Identifier les clients prospects stratégiques </nb-option>
-                      <nb-option value="Approcher les clients prospects stratégiques ">Approcher les clients prospects stratégiques </nb-option>
-                      <nb-option value="Présenter les produits et services de l’opérateur aux clients prospects">Présenter les produits et services de l’opérateur aux clients prospects</nb-option>
-                      <nb-option value="Mieux comprendre le besoin et les attentes des clients grâce au feedback">Mieux comprendre le besoin et les attentes des clients grâce au feedback</nb-option>
-                      <nb-option value="Développer les propositions les plus adéquates aux besoins du client">Développer les propositions les plus adéquates aux besoins du client</nb-option>
+                      <nb-option value="Identifier les clients prospects stratégiques ">Identifier les clients prospects
+                        stratégiques </nb-option>
+                      <nb-option value="Approcher les clients prospects stratégiques ">Approcher les clients prospects
+                        stratégiques </nb-option>
+                      <nb-option
+                        value="Présenter les produits et services de l’opérateur aux clients prospects">Présenter les
+                        produits et services de l’opérateur aux clients prospects</nb-option>
+                      <nb-option value="Mieux comprendre le besoin et les attentes des clients grâce au feedback">Mieux
+                        comprendre le besoin et les attentes des clients grâce au feedback</nb-option>
+                      <nb-option value="Développer les propositions les plus adéquates aux besoins du client">Développer
+                        les propositions les plus adéquates aux besoins du client</nb-option>
                       <nb-option value="Négocier des contrats de vente ">Négocier des contrats de vente </nb-option>
                       <nb-option value="Signer des contrats de vente ">Signer des contrats de vente </nb-option>
-                      <nb-option value="Atteindre ou dépasser les objectifs de vente">Atteindre ou dépasser les objectifs de vente</nb-option>
-                      <nb-option value="Comparer les produits de l’opérateur avec ses concurrents">Comparer les produits de l’opérateur avec ses concurrents</nb-option>
-                      <nb-option value="Monitorer les potentielles menaces pour les activités B2B de l’opérateur">Monitorer les potentielles menaces pour les activités B2B de l’opérateur</nb-option>
+                      <nb-option value="Atteindre ou dépasser les objectifs de vente">Atteindre ou dépasser les
+                        objectifs de vente</nb-option>
+                      <nb-option value="Comparer les produits de l’opérateur avec ses concurrents">Comparer les produits
+                        de l’opérateur avec ses concurrents</nb-option>
+                      <nb-option
+                        value="Monitorer les potentielles menaces pour les activités B2B de l’opérateur">Monitorer les
+                        potentielles menaces pour les activités B2B de l’opérateur</nb-option>
                       <nb-option value="Analyser les tendances du marché">Analyser les tendances du marché</nb-option>
                     </nb-select>
                   </div>
@@ -99,8 +109,7 @@
                     <p class="lorem">
                       <b>Réseau</b>
                     </p>
-                    <nb-select selected="1" shape="semi-round" multiple fullWidth
-                      [(selected)]="selectedItemsReseau">
+                    <nb-select selected="1" shape="semi-round" multiple fullWidth [(selected)]="selectedItemsReseau">
                       <nb-option value="Diagnostiquer les pannes">Diagnostiquer les pannes</nb-option>
                       <nb-option value="Réparer les pannes le plus vite possible">Réparer les pannes le plus vite
                         possible</nb-option>
@@ -132,30 +141,37 @@
           <nb-step [stepControl]="thirdForm" label="Étape 3">
             <div class="card my-5">
               <div class="card-body">
-                <form (ngSubmit)="onThirdSubmit()" #driverForm="ngForm">
+                <form (ngSubmit)="onThirdSubmitV2()" #driverForm="ngForm">
                   <nb-list nbInfiniteList listenWindowScroll>
                     <nb-list-item *ngFor="let act of realActivitiesList" class="center-labels">
 
-                      <div class="input-container">
-                        <label>
-                          Combien d’employés travaillent sur l’activité ?
-                          <br>
-                          <input type="text" nbInput fullWidth shape="semi-round" placeholder="{{act.name}}"
-                            name="nbEmployees" id="nbEmployees" required>
-                        </label>
+                      <div class="input-container ">
+                        <div>
+                          <label class="activity-label">
+                            <b>Combien d’employés travaillent sur l’activité ?</b>
+                            <br>
+                          </label>
+                          <input type="text" nbInput fullWidth [(ngModel)]="act.nbEmployees" shape="semi-round" placeholder="{{act.name}}"
+                            name="nbEmployees" id="nbEmployees" #nbEmployees="ngModel" required>
+                        </div>
                         <br>
-                        <label>
-                          Quelle est la valeur du driver de productivité ?
-                          <br>
-                          <input type="text" nbInput fullWidth shape="semi-round"
+                        <div>
+                          <label>
+                            <b>Quelle est la valeur du driver de productivité ?</b>
+                            <br>
+                          </label>
+                          <input type="text" [(ngModel)]="act.valueDriverProductivite" nbInput fullWidth shape="semi-round"
                             placeholder="Valeur du driver de productivité" name="valueDriverProductivite"
-                            id="valueDriverProductivite" required>
-                        </label>
+                            id="valueDriverProductivite" #valDriver="ngModel" required>
+                        </div>
                       </div>
+
                     </nb-list-item>
                   </nb-list>
                   <button nbButton nbStepperPrevious class="btn btn-info">Précédant</button>
-                  <button nbButton nbStepperNext type="submit" [disabled]="!driverForm.form.valid"
+                  <!-- <button nbButton nbStepperNext type="submit" [disabled]="!driverForm.form.valid"
+                    class="btn btn-info">Suivant</button> -->
+                    <button nbButton nbStepperNext type="button" (click)="onThirdSubmitV2()" [disabled]="!driverForm.form.valid"
                     class="btn btn-info">Suivant</button>
                 </form>
               </div>

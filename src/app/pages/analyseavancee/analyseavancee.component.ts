@@ -90,12 +90,12 @@ export class AnalyseavanceeComponent implements OnInit {
   }
 
   onFirstSubmit() {
-    this.uniteService
-    .createUnite(this.unite).subscribe(data => {
-        console.log(data)
-        this.stepper.next();
-      },
-        error => console.log(error));
+    // this.uniteService
+    // .createUnite(this.unite).subscribe(data => {
+    //     console.log(data)
+    //     this.stepper.next();
+    //   },
+    //     error => console.log(error));
 
     this.firstForm.markAsDirty();
     
@@ -139,7 +139,7 @@ export class AnalyseavanceeComponent implements OnInit {
     }
 
     // console.log(this.realActivitiesList)
-    this.activitiesList = this.selectedItemsB2B.concat(this.selectedItemsTransformationInnovation, this.selectedItemsServiceClient);
+    this.activitiesList = this.selectedItemsB2B.concat(this.selectedItemsTransformationInnovation, this.selectedItemsServiceClient, this.selectedItemsReseau);
     for (let i = 0; i < this.activitiesList.length; i++ ) {
       this.activite = new Activite();
       this.activite.name = this.activitiesList[i];
@@ -163,6 +163,21 @@ export class AnalyseavanceeComponent implements OnInit {
     }
     // console.log(this.realActivitiesList);
     this.thirdForm.markAsDirty();
+  }
+
+  // Make unité activites list == realActivitiesList
+  onThirdSubmitV2(){
+    // this.unite.name="V2";
+    // this.unite.nbEmployees= 15;
+    console.log(this.unite.name);
+    console.log(this.unite.nbEmployees);
+    this.unite.activites = this.realActivitiesList;
+    this.uniteService.createUnite(this.unite).subscribe(data => {
+        console.log(data)
+        // this.stepper.next();
+      },
+        error => console.log(error));
+    
   }
 
   onFourthSubmit() {

@@ -98,11 +98,11 @@ const routes: Routes = [{
       loadChildren: () => import('./miscellaneous/miscellaneous.module')
         .then(m => m.MiscellaneousModule),
     },
-    // {
-    //   path: '',
-    //   redirectTo: 'analyseavancee',
-    //   pathMatch: 'full',
-    // },
+    {
+      path: '',
+      redirectTo: 'historique',
+      pathMatch: 'full',
+    },
     {
       path: '**',
       component: NotFoundComponent,
