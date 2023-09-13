@@ -9,14 +9,14 @@
               <div class="card-body">
                 <form (ngSubmit)="onFirstSubmit()" #uniteForm="ngForm">
                   <div class="form-group">
-                    <label for="name"> <b>Quel est le nom de l'unité ?</b></label>
+                    <label for="name"> <b>Entrez le nom de l'unité:</b></label>
                     <input type="text" nbInput fullWidth shape="semi-round" [(ngModel)]="unite.name" #name="ngModel"
                       placeholder="Nom de l'unité" id="name" name="name" required>
                   </div>
                   <div [hidden]="!name.touched || name.valid" class="alert alert-danger">Le nom de l'unité est un champ
                     requis</div>
                   <div class="form-group">
-                    <label for="nbEmployees"><b>Quel est le nombre d'employés de l'unité ?</b></label>
+                    <label for="nbEmployees"><b>Entrez le nombre d'employés de l'unité:</b></label>
                     <input type="text" nbInput fullWidth [(ngModel)]="unite.nbEmployees" shape="semi-round"
                       id="nbEmployees" name="nbEmployees" placeholder="Nombre d'employés de l'unité" required
                       #nbEmployees="ngModel">
@@ -24,7 +24,8 @@
                   <div [hidden]="!nbEmployees.touched || nbEmployees.valid" class="alert alert-danger">Le nombre
                     d'employés est un champ
                     requis</div>
-                  <button nbButton nbStepperNext type="submit" [disabled]="!uniteForm.form.valid" class="btn btn-info">Suivant</button>
+                  <button nbButton nbStepperNext type="submit" [disabled]="!uniteForm.form.valid"
+                    class="btn btn-info">Suivant</button>
                 </form>
               </div>
             </div>
@@ -148,21 +149,22 @@
                       <div class="input-container ">
                         <div>
                           <label class="activity-label">
-                            <b>Combien d’employés travaillent sur l’activité ?</b>
+                            <b>Entrez le nombre d'employés travaillant sur l’activité:</b>
                             <br>
                           </label>
-                          <input type="text" nbInput fullWidth [(ngModel)]="act.nbEmployees" shape="semi-round" placeholder="{{act.name}}"
-                            name="nbEmployees" id="nbEmployees" #nbEmployees="ngModel" required>
+                          <input type="text" nbInput fullWidth [(ngModel)]="act.nbEmployees" shape="semi-round"
+                            placeholder="{{act.name}}" name="nbEmployees" id="nbEmployees" #nbEmployees="ngModel"
+                            required>
                         </div>
                         <br>
                         <div>
                           <label>
-                            <b>Quelle est la valeur du driver de productivité ?</b>
+                            <b>Entrez la valeur du driver de productivité:</b>
                             <br>
                           </label>
-                          <input type="text" [(ngModel)]="act.valueDriverProductivite" nbInput fullWidth shape="semi-round"
-                            placeholder="Valeur du driver de productivité" name="valueDriverProductivite"
-                            id="valueDriverProductivite" #valDriver="ngModel" required>
+                          <input type="text" [(ngModel)]="act.valueDriverProductivite" nbInput fullWidth
+                            shape="semi-round" placeholder="Valeur du driver de productivité"
+                            name="valueDriverProductivite" id="valueDriverProductivite" #valDriver="ngModel" required>
                         </div>
                       </div>
 
@@ -171,14 +173,14 @@
                   <button nbButton nbStepperPrevious class="btn btn-info">Précédant</button>
                   <!-- <button nbButton nbStepperNext type="submit" [disabled]="!driverForm.form.valid"
                     class="btn btn-info">Suivant</button> -->
-                    <button nbButton nbStepperNext type="button" (click)="onThirdSubmitV2()" [disabled]="!driverForm.form.valid"
-                    class="btn btn-info">Suivant</button>
+                  <button nbButton nbStepperNext type="button" (click)="onThirdSubmitV2()"
+                    [disabled]="!driverForm.form.valid" class="btn btn-info">Suivant</button>
                 </form>
               </div>
             </div>
           </nb-step>
 
-          <nb-step [stepControl]="fourthForm" label="Étape 4">
+          <!-- <nb-step [stepControl]="fourthForm" label="Étape 4">
             <nb-card-header>Résultat de l’analyse avancée</nb-card-header>
 
             <div class="col-md-12 col-xxl-12 col-xxxl-12">
@@ -194,12 +196,6 @@
               <button nbButton status="danger">Sous-performance</button>
               <ngx-slider [(value)]="minValue1" [(highValue)]="maxValue1" [options]="options"></ngx-slider>
             </div>
-            <!-- <div class="col-md-12 col-xxl-12 col-xxxl-12">
-              <br>
-              <p>Intervenir sur le plus de pannes possible</p>
-              <button nbButton status="danger">Sous-performance</button>
-              <ngx-slider [(value)]="minValue2" [(highValue)]="maxValue2" [options]="options"></ngx-slider>
-            </div> -->
             <div class="col-md-12 col-xxl-12 col-xxxl-12">
               <br>
               <p>Effectuer des changements sur le réseau</p>
@@ -220,14 +216,41 @@
             </div>
             <button nbButton nbStepperPrevious>Précédant</button>
             <button nbButton nbStepperNext>Suivant</button>
+          </nb-step> -->
+
+          <!-- <nb-step [stepControl]="fourthForm" label="Étape 4">
+            <nb-card-header>Résultat de l’analyse avancée</nb-card-header>
+            <div class="col-md-12 col-xxl-12 col-xxxl-12" *ngFor="let act of realActivitiesList">
+              <br>
+              <p>{{act.name}}</p>
+              <button nbButton [status]="getRandomChoice().status">{{ getRandomChoice().label }}</button>
+              <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ngx-slider>
+
+            </div>
+          </nb-step> -->
+          <nb-step [stepControl]="fourthForm" label="Étape 4">
+            <nb-card-header>Résultat de l’analyse avancée</nb-card-header>
+            <div class="col-md-12 col-xxl-12 col-xxxl-12" *ngFor="let act of realActivitiesList">
+              <br>
+              <p>{{act.name}}</p>
+              <div class="value-bar">
+                <div class="min-value">{{ minValue }}</div>
+                <div class="bar">
+                  <div class="fill" [style.width.%]="(currentValue - minValue) / (maxValue - minValue) * 100"></div>
+                </div>
+                <div class="max-value">{{ maxValue }}</div>
+              </div>              
+            </div>
           </nb-step>
 
           <nb-step [stepControl]="fourthForm" [hidden]="true" label="Fourth step">
             <div class="step-container">
-              <h3>Wizard completed!</h3>
-              <button nbButton (click)="stepper.reset()">Try again</button>
+              <h3>Analyse acheveée!</h3>
+              <button disabled nbButton (click)="stepper.reset()">Recommencer</button>
             </div>
           </nb-step>
+
+
         </nb-stepper>
       </nb-card-body>
     </nb-card>

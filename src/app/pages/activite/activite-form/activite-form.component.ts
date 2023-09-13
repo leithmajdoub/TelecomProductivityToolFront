@@ -24,7 +24,8 @@ export class ActiviteFormComponent implements OnInit {
   }
 
   gotoActiviteList() {
-    this.router.navigate(['/activite-list']);
+    this.router.navigate(['/pages/activite-list']);
+    // window.location.reload();
   }
 
 }

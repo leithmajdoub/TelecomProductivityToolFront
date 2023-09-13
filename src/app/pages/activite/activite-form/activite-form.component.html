@@ -4,49 +4,49 @@
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" [(ngModel)]="activite.name" class="form-control" id="name" name="name"
-                    placeholder="Quel est le nom de l'activite ?" required #name="ngModel">
+                    placeholder="Entrez le nom de l'activite ?" required #name="ngModel">
             </div>
             <div [hidden]="!name.pristine" class="alert alert-danger">Le nom est un champ requis</div>
             <div class="form-group">
                 <label for="nbEmployees">Nombre d'employes</label>
                 <input type="text" [(ngModel)]="activite.nbEmployees" class="form-control" id="nbEmployees" name="nbEmployees"
-                    placeholder="Quel est le nombre d'employes travaillant sur l'activite ?" required #nbEmployees="ngModel">
+                    placeholder="Entrez le nombre d'employes travaillant sur l'activite:" required #nbEmployees="ngModel">
                 <div [hidden]="!nbEmployees.pristine" class="alert alert-danger">Le nombre d'employes est un champ requis</div>
             </div>
             <div class="form-group">
-                <label for="unitPerformance">Preformance de l'unite</label>
+                <label for="unitPerformance">Performance de l'unite</label>
                 <input type="text" [(ngModel)]="activite.unitPerformance" class="form-control" id="unitPerformance" name="unitPerformance"
-                    placeholder="Quel est la performance de l'unite ?" required #unitPerformance="ngModel">
+                    placeholder="Entrez la performance de l'unite:" required #unitPerformance="ngModel">
                 <div [hidden]="!unitPerformance.pristine" class="alert alert-danger">La performance de l'unite est un champ requis</div>
             </div>
             <div class="form-group">
                 <label for="driverProductivite">Driver de productivité</label>
                 <input type="text" [(ngModel)]="activite.driverProductivite" class="form-control" id="driverProductivite" name="driverProductivite"
-                    placeholder="Quel est le driver de productivité ?" required #driverProductivite="ngModel">
+                    placeholder="Entrez le driver de productivité:" required #driverProductivite="ngModel">
                 <div [hidden]="!driverProductivite.pristine" class="alert alert-danger">Le driver de productivité est un champ requis</div>
             </div>
             <div class="form-group">
                 <label for="valueDriverProductivite">Valeur du driver de productivité</label>
                 <input type="text" [(ngModel)]="activite.valueDriverProductivite" class="form-control" id="valueDriverProductivite" name="valueDriverProductivite"
-                    placeholder="Quel est la valeur du driver de productivité ?" required #valueDriverProductivite="ngModel">
+                    placeholder="Entrez la valeur du driver de productivité:" required #valueDriverProductivite="ngModel">
                 <div [hidden]="!valueDriverProductivite.pristine" class="alert alert-danger">La valeur du driver de productivité est un champ requis</div>
             </div>
             <div class="form-group">
                 <label for="minValueBenchmarkDriverProductivite">Valeur min du driver de productivité</label>
                 <input type="text" [(ngModel)]="activite.minValueBenchmarkDriverProductivite" class="form-control" id="minValueBenchmarkDriverProductivite" name="minValueBenchmarkDriverProductivite"
-                    placeholder="Quel est la valeur du driver de productivité ?" required #minValueBenchmarkDriverProductivite="ngModel">
+                    placeholder="Entrez la valeur du driver de productivité:" required #minValueBenchmarkDriverProductivite="ngModel">
                 <div [hidden]="!minValueBenchmarkDriverProductivite.pristine" class="alert alert-danger">La valeur  min du driver de productivité est un champ requis</div>
             </div>
             <div class="form-group">
                 <label for="maxValueBenchmarkDriverProductivite">Valeur max du driver de productivité</label>
                 <input type="text" [(ngModel)]="activite.maxValueBenchmarkDriverProductivite" class="form-control" id="maxValueBenchmarkDriverProductivite" name="maxValueBenchmarkDriverProductivite"
-                    placeholder="Quel est la valeur du driver de productivité ?" required #maxValueBenchmarkDriverProductivite="ngModel">
+                    placeholder="Entrez la valeur du driver de productivité:" required #maxValueBenchmarkDriverProductivite="ngModel">
                 <div [hidden]="!maxValueBenchmarkDriverProductivite.pristine" class="alert alert-danger">La valeur max du driver de productivité est un champ requis</div>
             </div>
             <div class="form-group">
                 <label for="positionningAgainstBenchmark">Positionnement contre le Benchmark</label>
                 <input type="text" [(ngModel)]="activite.positionningAgainstBenchmark" class="form-control" id="positionningAgainstBenchmark" name="positionningAgainstBenchmark"
-                    placeholder="Quel est la valeur du driver de productivité ?" required #positionningAgainstBenchmark="ngModel">
+                    placeholder="Entrez la valeur du driver de productivité:" required #positionningAgainstBenchmark="ngModel">
                 <div [hidden]="!positionningAgainstBenchmark.pristine" class="alert alert-danger">Le positionnement contre le Benchmark est un champ requis</div>
             </div>
             <!-- <button type="submit" [disabled]="!activiteForm.form.valid" class="btn btn-info">Submit</button> -->

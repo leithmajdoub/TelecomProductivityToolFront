@@ -37,10 +37,13 @@ export class AnalyseavanceeComponent implements OnInit {
   maxValue4: number = 150;
   minValue5: number = 20;
   maxValue5: number = 170;
+
   options: Options = {
     floor: 0,
     ceil: 250
   }
+
+  value = 50
 
   firstForm: UntypedFormGroup;
   secondForm: UntypedFormGroup;
@@ -54,6 +57,12 @@ export class AnalyseavanceeComponent implements OnInit {
   //                             "Implémenter les mesures de sécurité réseau (SOC)"];
   activitiesList: string[];
   fifthForm: UntypedFormGroup;
+
+  buttonChoices = [
+    { label: 'Performance idéale', status: 'success' },
+    { label: 'Sous-performance', status: 'danger' },
+    { label: 'Sur-performance', status: 'warning' },
+  ];
 
 
   constructor(private fb: UntypedFormBuilder, private uniteService: UniteService, private activiteService: ActiviteService) {
@@ -190,6 +199,21 @@ export class AnalyseavanceeComponent implements OnInit {
 
   trackByFn(item: Activite) {
     return item.id; // or any other unique identifier for the item
+  }
+
+  getRandomChoice() {
+    const randomIndex = Math.floor(Math.random() * this.buttonChoices.length);
+    return this.buttonChoices[randomIndex];
+  }
+
+  calculateWidth(): number {
+    if (this.value <= this.minValue) {
+      return 0;
+    } else if (this.value >= this.maxValue) {
+      return 100;
+    } else {
+      return ((this.value - this.minValue) / (this.maxValue - this.minValue)) * 100;
+    }
   }
 
 }

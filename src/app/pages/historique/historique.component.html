@@ -5,17 +5,21 @@
 
     <nb-card-body>
         <div class="button-container">
-            <button status="success" outline nbButton (click)="exportexcel()">Exporter en Excel <nb-icon icon="download-outline"></nb-icon></button>
-            <button status="info" outline nbButton (click)="exportCSV()">Exporter en CSV <nb-icon icon="download-outline"></nb-icon></button>
+            <button class="button-height" status="success" outline nbButton (click)="exportexcel()"> 
+                <img src="../../../../assets/images/logo-excel.svg" alt="Excel Logo" width="20" height="20">
+                <nb-icon icon="download-outline"></nb-icon>
+              </button>
+            <button class="button-height" status="info" outline nbButton (click)="exportCSV()">CSV <nb-icon icon="download-outline"></nb-icon></button>
         </div>
         <table id="excel-table" class="table table-bordered">
             <thead>
                 <tr>
                     <th (click)="sortAnalysesById()">ID</th>
-                    <th (click)="sortAnalysesByCodeMission()">Code Mission</th>
+                    <th (click)="sortAnalysesByCodeMission()">Code Projet</th>
+                    <th (click)="sortAnalysesByNomUnite('nomUnite')">Nom du projet</th>
                     <th>Date</th>
-                    <th (click)="sortAnalysesByNomUnite('nomUnite')">Unité analysée</th>
                     <th>Consultant</th>
+                    <th>Compte rendu</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -23,10 +27,11 @@
                 <tr *ngFor="let item of data1">
                     <td>{{ item.id }}</td>
                     <td>{{ item.codeMission }}</td>
-                    <td>{{ item.date }}</td>
                     <td>{{ item.nomUnite }}</td>
+                    <td>{{ item.date }}</td>
                     <td>{{ item.nomConsultant }}</td>
-                    <td>
+                    <td class="text-center"><button nbButton outline status="primary"><nb-icon icon="external-link-outline"></nb-icon></button></td>
+                    <td class="text-center">
                         <button nbButton ghost status="primary"><nb-icon icon="edit-outline" (click)="openWindowForm(item.id)"></nb-icon></button>
                         <button nbButton ghost status="danger"><nb-icon icon="trash-outline" (click)="deleteAnalyse(item.id)"></nb-icon></button>
                     </td>

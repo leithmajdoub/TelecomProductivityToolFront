@@ -5,8 +5,11 @@
 
   <nb-card-body >
     <div class="button-container">
-      <button status="success" outline nbButton (click)="exportexcel()">Exporter en Excel <nb-icon icon="download-outline"></nb-icon></button>
-      <button status="info" outline nbButton (click)="exportCSV()">Exporter en CSV <nb-icon icon="download-outline"></nb-icon></button>
+      <button status="success" class="button-height" outline nbButton (click)="exportexcel()"> 
+        <img src="../../../../assets/images/logo-excel.svg" alt="Excel Logo" width="20" height="20">
+        <nb-icon icon="download-outline"></nb-icon>
+      </button>
+      <button class="button-height" status="info" outline nbButton (click)="exportCSV()">CSV <nb-icon icon="download-outline"></nb-icon></button>
     </div>
       <table id="excel-table" class="table table-bordered">
           <thead>
