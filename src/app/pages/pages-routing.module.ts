@@ -11,6 +11,7 @@ import { UniteListComponent } from './Unite/unite-list/unite-list.component';
 import { UniteFormComponent } from './Unite/unite-form/unite-form.component';
 import { ActiviteFormComponent } from './activite/activite-form/activite-form.component';
 import { ActiviteListComponent } from './activite/activite-list/activite-list.component';
+import { ResultatComponent } from './resultat/resultat.component';
 
 const routes: Routes = [{
   path: '',
@@ -19,6 +20,10 @@ const routes: Routes = [{
     {
       path: 'analyseavancee',
       component: AnalyseavanceeComponent,
+    },
+    {
+      path: 'resultat',
+      component: ResultatComponent,
     },
     {
       path: 'unite-list',

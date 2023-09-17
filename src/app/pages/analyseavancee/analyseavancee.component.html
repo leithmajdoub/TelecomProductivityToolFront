@@ -41,10 +41,10 @@
                       <b>B2B</b>
                     </p>
                     <nb-select selected="1" shape="semi-round" multiple fullWidth [(selected)]="selectedItemsB2B">
-                      <nb-option value="Identifier les clients prospects stratégiques ">Identifier les clients prospects
-                        stratégiques </nb-option>
-                      <nb-option value="Approcher les clients prospects stratégiques ">Approcher les clients prospects
-                        stratégiques </nb-option>
+                      <nb-option value="Identifier les clients prospects stratégiques">Identifier les clients prospects
+                        stratégiques</nb-option>
+                      <nb-option value="Approcher les clients prospects stratégiques">Approcher les clients prospects
+                        stratégiques</nb-option>
                       <nb-option
                         value="Présenter les produits et services de l’opérateur aux clients prospects">Présenter les
                         produits et services de l’opérateur aux clients prospects</nb-option>
@@ -52,8 +52,8 @@
                         comprendre le besoin et les attentes des clients grâce au feedback</nb-option>
                       <nb-option value="Développer les propositions les plus adéquates aux besoins du client">Développer
                         les propositions les plus adéquates aux besoins du client</nb-option>
-                      <nb-option value="Négocier des contrats de vente ">Négocier des contrats de vente </nb-option>
-                      <nb-option value="Signer des contrats de vente ">Signer des contrats de vente </nb-option>
+                      <nb-option value="Négocier des contrats de vente">Négocier des contrats de vente</nb-option>
+                      <nb-option value="Signer des contrats de vente">Signer des contrats de vente</nb-option>
                       <nb-option value="Atteindre ou dépasser les objectifs de vente">Atteindre ou dépasser les
                         objectifs de vente</nb-option>
                       <nb-option value="Comparer les produits de l’opérateur avec ses concurrents">Comparer les produits
@@ -98,8 +98,7 @@
                       [(selected)]="selectedItemsServiceClient">
                       <nb-option value="Traiter les réclamations des clients">Traiter les réclamations des
                         clients</nb-option>
-                      <nb-option value="Répondre aux questions des clients sur les produits et services de
-                      l’opérateur">Répondre aux questions des clients sur les produits et services de
+                      <nb-option value="Répondre aux questions des clients sur les produits et services de l’opérateur">Répondre aux questions des clients sur les produits et services de
                         l’opérateur</nb-option>
                       <nb-option value="Répondre aux autres requetes des clients">Répondre aux autres requetes des
                         clients</nb-option>
@@ -171,8 +170,6 @@
                     </nb-list-item>
                   </nb-list>
                   <button nbButton nbStepperPrevious class="btn btn-info">Précédant</button>
-                  <!-- <button nbButton nbStepperNext type="submit" [disabled]="!driverForm.form.valid"
-                    class="btn btn-info">Suivant</button> -->
                   <button nbButton nbStepperNext type="button" (click)="onThirdSubmitV2()"
                     [disabled]="!driverForm.form.valid" class="btn btn-info">Suivant</button>
                 </form>
@@ -181,54 +178,6 @@
           </nb-step>
 
           <!-- <nb-step [stepControl]="fourthForm" label="Étape 4">
-            <nb-card-header>Résultat de l’analyse avancée</nb-card-header>
-
-            <div class="col-md-12 col-xxl-12 col-xxxl-12">
-              <br>
-              <p>Identifier les clients prospects stratégiques</p>
-              <button nbButton status="success">Performance idéale</button>
-              <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ngx-slider>
-
-            </div>
-            <div class="col-md-12 col-xxl-12 col-xxxl-12">
-              <br>
-              <p>Présenter les produits et services de l’opérateur aux clients prospects</p>
-              <button nbButton status="danger">Sous-performance</button>
-              <ngx-slider [(value)]="minValue1" [(highValue)]="maxValue1" [options]="options"></ngx-slider>
-            </div>
-            <div class="col-md-12 col-xxl-12 col-xxxl-12">
-              <br>
-              <p>Effectuer des changements sur le réseau</p>
-              <button nbButton status="warning">Sur-performance</button>
-              <ngx-slider [(value)]="minValue3" [(highValue)]="maxValue3" [options]="options"></ngx-slider>
-            </div>
-            <div class="col-md-12 col-xxl-12 col-xxxl-12">
-              <br>
-              <p>Monitoring de la performance réseau</p>
-              <button nbButton status="success">Performance idéale</button>
-              <ngx-slider [(value)]="minValue4" [(highValue)]="maxValue4" [options]="options"></ngx-slider>
-            </div>
-            <div class="col-md-12 col-xxl-12 col-xxxl-12">
-              <br>
-              <p>Implémenter les mesures de sécurité réseau (SOC)</p>
-              <button nbButton status="success">Performance idéale</button>
-              <ngx-slider [(value)]="minValue5" [(highValue)]="maxValue5" [options]="options"></ngx-slider>
-            </div>
-            <button nbButton nbStepperPrevious>Précédant</button>
-            <button nbButton nbStepperNext>Suivant</button>
-          </nb-step> -->
-
-          <!-- <nb-step [stepControl]="fourthForm" label="Étape 4">
-            <nb-card-header>Résultat de l’analyse avancée</nb-card-header>
-            <div class="col-md-12 col-xxl-12 col-xxxl-12" *ngFor="let act of realActivitiesList">
-              <br>
-              <p>{{act.name}}</p>
-              <button nbButton [status]="getRandomChoice().status">{{ getRandomChoice().label }}</button>
-              <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ngx-slider>
-
-            </div>
-          </nb-step> -->
-          <nb-step [stepControl]="fourthForm" label="Étape 4">
             <nb-card-header>Résultat de l’analyse avancée</nb-card-header>
             <div class="col-md-12 col-xxl-12 col-xxxl-12" *ngFor="let act of realActivitiesList">
               <br>
@@ -241,8 +190,12 @@
                 <div class="max-value">{{ maxValue }}</div>
               </div>              
             </div>
-          </nb-step>
+          </nb-step> -->
 
+          <nb-step [stepControl]="fourthForm" label="Étape 4">
+            <ngx-resultat [unite]="unite"></ngx-resultat>
+          </nb-step>
+          
           <nb-step [stepControl]="fourthForm" [hidden]="true" label="Fourth step">
             <div class="step-container">
               <h3>Analyse acheveée!</h3>

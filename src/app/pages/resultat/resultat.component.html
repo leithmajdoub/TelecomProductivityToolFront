@@ -1,0 +1,41 @@
+<nb-card>
+    <nb-card-header>
+        Résultat de l’analyse avancée
+    </nb-card-header>
+
+    <nb-card-body >
+      <div class="button-container">
+        <button class="button-height" status="success" outline nbButton (click)="exportexcel()"> 
+          <img src="../../../../assets/images/logo-excel.svg" alt="Excel Logo" width="20" height="20">
+          <nb-icon icon="download-outline"></nb-icon>
+        </button>
+        <button class="button-height" status="info" outline nbButton (click)="exportCSV()">CSV <nb-icon icon="download-outline"></nb-icon></button>
+    </div>
+        <table #table id="excel-table" class="table table-bordered">
+            <thead>
+              <tr>
+                <!-- <th>#</th> -->
+                <th>Activité</th>
+                <th>Driver de productivité</th>
+                <th>Valeur du driver</th>
+                <th>Performance de l'activité</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let activity of unite.activites">
+                  <!-- <td>{{ activity.id }}</td> -->
+                  <td>{{ activity.name }}</td>
+                  <td>{{ activity.driverProductivite }}</td>
+                  <td>{{ activity.valueDriverProductivite }}</td>
+                  <td class="horizontal-elements">
+                    <span class="min-value"><b>{{ activity.minValueBenchmarkDriverProductivite }}</b></span>
+                    <div class="progress-container">
+                      <nb-progress-bar size="large" [value]="100" [status]="getStatusForBenchmark(activity.positionningAgainstBenchmark)">{{ getPositionningAgainstBenchmarkString(activity.positionningAgainstBenchmark) }}</nb-progress-bar>
+                    </div>
+                    <span class="max-value"><b>{{ activity.maxValueBenchmarkDriverProductivite }}</b></span>
+                  </td>
+                </tr>
+            </tbody>
+        </table>
+    </nb-card-body>
+</nb-card>

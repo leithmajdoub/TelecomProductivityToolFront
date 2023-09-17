@@ -23,55 +23,8 @@
   text-align: center;
 }
 
-// .input-container {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   width: 100%;
-//   max-width: 5000px; /* Adjust the max-width as needed */
-// }
-
-  // .input-container label {
-  //   width: 100%;
-  //   text-align: center;
-  // }
-
-// .input-container input {
-//   width: 100%;
-// }
-
-// .activity-label {
-//   margin-bottom: 10px; /* Adjust the margin as needed */
-// }
-
-// .input-container input {
-//   width: 100% !important;
-// }
-
 .nb-input-group input {
   width: 100%;
 }
 
-.value-bar {
-  display: flex;
-  align-items: center;
-  width: 200px;
-}
-
-.bar {
-  flex-grow: 1;
-  height: 20px;
-  background-color: #ccc;
-  position: relative;
-}
-
-.fill {
-  height: 100%;
-  background-color: #007bff;
-}
-
-.min-value,
-.max-value {
-  margin: 0 5px;
-}
 

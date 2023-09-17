@@ -1,0 +1,29 @@
+.button-container {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.button-container button {
+  margin-right: 10px;
+}
+
+.button-height {
+  height: 3rem;
+}
+
+.horizontal-elements {
+  display: flex;
+  align-items: center;
+}
+
+.min-value {
+  margin-right: 10px; /* Espacement entre "Min" et la barre de progression */
+}
+
+.max-value {
+  margin-left: 10px; /* Espacement entre la barre de progression et "Max" */
+}
+
+.progress-container {
+  flex-grow: 1; /* Permet à la barre de progression de remplir l'espace restant */
+}

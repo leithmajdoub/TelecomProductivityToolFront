@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbAccordionModule, NbButtonComponent, NbButtonModule, NbCardModule, NbCheckboxModule, NbIconModule, NbListModule, NbMenuModule, NbRouteTabsetModule, NbSelectModule, NbStepperModule, NbTabsetModule, NbUserModule } from '@nebular/theme';
+import { NbAccordionModule, NbButtonComponent, NbButtonModule, NbCardModule, NbCheckboxModule, NbIconModule, NbListModule, NbMenuModule, NbProgressBarModule, NbRouteTabsetModule, NbSelectModule, NbStepperModule, NbTabsetModule, NbUserModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -29,6 +29,7 @@ import { NbInputModule } from '@nebular/theme';
 import { UpdateUniteComponent } from './Unite/update-unite/update-unite.component';
 import { UpdateActiviteComponent } from './activite/update-activite/update-activite.component';
 import { UpdateHistoriqueComponent } from './update-historique/update-historique.component';
+import { ResultatComponent } from './resultat/resultat.component';
 
 @NgModule({
   imports: [
@@ -55,6 +56,7 @@ import { UpdateHistoriqueComponent } from './update-historique/update-historique
     RouterModule,
     NbInputModule,
     NbIconModule,
+    NbProgressBarModule
   ],
   declarations: [
     PagesComponent,
@@ -67,6 +69,7 @@ import { UpdateHistoriqueComponent } from './update-historique/update-historique
     UpdateUniteComponent,
     UpdateActiviteComponent,
     UpdateHistoriqueComponent,
+    ResultatComponent,
   ],
 })
 export class PagesModule {
